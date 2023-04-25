@@ -1,13 +1,15 @@
-import React from "react";
 import axios from "axios";
-import { useState } from "react";
-import LoginInterface from "../model/LoginInterface";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/login.css"
+import LoginInterface from "../model/LoginInterface";
+import "../styles/login.css";
+import { MyContextType } from "../model/MyContextType";
+import { KeyContext } from "../App";
 
 export default function LoginPage() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const {setIsLoggedIn} = useContext(KeyContext) as MyContextType;
 
   const navigate = useNavigate();
 
@@ -23,6 +25,8 @@ export default function LoginPage() {
       .post("http://localhost:8081/auth/login", objLogin)
       .then((resposta) => {
         sessionStorage.setItem("token", resposta.data.token);
+
+        setIsLoggedIn(true);
 
         return navigate("/");
       })

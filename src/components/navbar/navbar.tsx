@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from "react-router-dom"
+import { KeyContext } from '../../App';
+import { MyContextType } from '../../model/MyContextType';
 
 const NavBar = () => {
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const token = sessionStorage.getItem('token');
-    setIsLoggedIn(token !== null);
-  }, []);
+  const {isLoggedIn} = useContext(KeyContext) as MyContextType;
 
   return (
     <nav>
