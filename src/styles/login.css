@@ -1,1 +1,9 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
+
+.container {
+    height: 100vh;
+}
+
+.card {
+    width: 400px;
+}

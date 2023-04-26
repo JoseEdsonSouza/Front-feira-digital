@@ -1,0 +1,5 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+.nav-link {
+    color: white !important;
+}
