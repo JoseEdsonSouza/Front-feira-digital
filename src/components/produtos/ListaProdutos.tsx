@@ -1,13 +1,12 @@
-import axios from "axios";
-import Busca from "../model/Busca";
-import Produto from "../model/Produto";
+import { useNavigate } from "react-router-dom";
+import Busca from "../../model/Busca";
+import Produto from "../../model/Produto";
+import { setupApiClient } from "../../service/api";
 
-const ListarProdutos = (props: Busca) => {
+const ListarProdutos = (props: Busca, navigate: ReturnType<typeof useNavigate>) => {
   const token = sessionStorage.getItem('token');
 
-  const api = axios.create({
-    baseURL: 'http://localhost:8081',
-  });
+  const api = setupApiClient(navigate);
   
   api.interceptors.request.use(config => {
     if (token) {
