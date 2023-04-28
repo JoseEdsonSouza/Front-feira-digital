@@ -33,9 +33,9 @@ export const AuthContext = createContext({} as AuthContextData);
 export function signOut(navigate: ReturnType<typeof useNavigate>) {
   try {
     sessionStorage.removeItem("token");
-    navigate("/login");
+    navigate("/");
   } catch (err) {
-    console.log("erro ao deslogar");
+    console.log("erro ao deslogar:", err);
   }
 }
 
@@ -93,7 +93,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
       api.defaults.headers.Authorization = `Bearer ${retorno.token}`;
       api.defaults.headers.common["id"] = retorno.id.toString();
 
-      toast.success("Login efetuado com sucesso!");
+      toast('Login efetuado com sucesso!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
 
       setIsLoggedIn(true);
 
