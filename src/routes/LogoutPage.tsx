@@ -17,7 +17,7 @@ const LogoutPage = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{ paddingTop: '60px' }}>
       <h1>Saindo...</h1>
     </div>
   );
