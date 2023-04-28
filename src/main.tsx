@@ -7,6 +7,7 @@ import App from "./App.tsx";
 import ErrorPage from "./routes/ErrorPage.tsx";
 import Produtos from "./components/produtos/Produto.tsx";
 import LogoutPage from "./routes/LogoutPage.tsx";
+import CadastroPage from "./routes/CadastroPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -27,8 +28,12 @@ const router = createBrowserRouter([
         element: <Produtos></Produtos>
       },
       {
-        path: "/logout",
+        path: "logout",
         element: <LogoutPage></LogoutPage>
+      },
+      {
+        path: "cadastro",
+        element: <CadastroPage></CadastroPage>
       }
     ]
   },

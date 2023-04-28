@@ -30,7 +30,7 @@ export default function LoginPage() {
           <form onSubmit={aoSubmeterFormulario}>
             <div className="mb-3">
               <label htmlFor="username" className="form-label">
-                Nome de usuário:
+                Login:
               </label>
               <input
                 type="text"

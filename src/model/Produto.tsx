@@ -12,4 +12,7 @@ export default interface Produto {
   imagem: string | null;
   preco: number | null;
   categoria: string | null;
+  descQuantidade: number | null;
+  pesoMedio: number | null;
+  descricao: string | null;
 }

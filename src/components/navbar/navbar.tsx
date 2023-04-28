@@ -8,7 +8,7 @@ const NavBar = () => {
 
   return (
     <>
-      <nav className="navbar navbar-dark bg-dark">
+      <nav className="navbar navbar-dark bg-dark fixed-top">
         <div className="container-fluid justify-content-end">
           <Link
             to="/"

@@ -1,6 +1,6 @@
 export default interface Busca {
   pagina: number;
-  tipoPreco: 'MAIOR_PRECO' | 'MENOR_PRECO';
+  tipoPreco: string | null;
   precoMin: number | null;
   precoMax: number | null;
   categoria: string | null;

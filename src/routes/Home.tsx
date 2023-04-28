@@ -3,15 +3,17 @@ import { Link, useNavigate } from "react-router-dom";
 import Busca from "../model/Busca";
 import Produto from "../model/Produto";
 import ListarProdutos from "../components/produtos/ListaProdutos";
+import "../styles/home.css";
 
 const Home = () => {
   const [nome, setNome] = useState("");
   const [listaProdutos, setListaProdutos] = useState<Produto[]>([]);
+  const [filtro, setFiltro] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const busca: Busca = {
     pagina: 1,
-    tipoPreco: "MENOR_PRECO",
+    tipoPreco: filtro !== null ? filtro : "MENOR_PRECO",
     precoMin: null,
     precoMax: null,
     categoria: null,
@@ -19,59 +21,59 @@ const Home = () => {
     nome: nome.length !== 0 ? nome : null,
   };
 
-  const handleSubmit = async (
-    event?: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    event?.preventDefault();
-
-    setListaProdutos(await ListarProdutos(busca, navigate));
-  };
-
   useEffect(() => {
-    handleSubmit();
-  }, []);
+    (async () => setListaProdutos(await ListarProdutos(busca, navigate)))();
+  }, [nome, filtro]);
 
   return (
     <div className="container">
       <h1 className="text-center my-5">Produtos</h1>
-      <div className="row">
-        <div className="col-md-4 offset-md-8 mb-3">
-          <div className="input-group">
-            <input
-              type="text"
-              className="form-control"
-              id="text"
-              placeholder="Buscar por nome"
-              value={nome}
-              onChange={(event) => setNome(event.target.value)}
-            />
-            <button
-              className="btn btn-primary"
-              type="button"
-              onClick={handleSubmit}
-            >
-              Buscar
-            </button>
+      <div className="row produtos-container">
+        <div className="col-md-8">
+          <div className="d-flex align-items-center">
+            <div className="input-group w-100">
+              <input
+                type="text"
+                className="form-control"
+                id="text"
+                placeholder="Buscar por nome"
+                value={nome}
+                onChange={(event) => setNome(event.target.value)}
+              />
+            </div>
           </div>
+        </div>
+        <div className="col-md-2 ms-auto">
+          <select
+            className="form-control form-select-sm"
+            id="filtro"
+            value={filtro ?? ""}
+            onChange={(event) => setFiltro(event.target.value || null)}
+          >
+            <option value="">Ordenar por:</option>
+            <option value="MENOR_PRECO">Menor preço</option>
+            <option value="MAIOR_PRECO">Maior preço</option>
+          </select>
         </div>
       </div>
       <div className="row">
         {listaProdutos.map((produto) => (
-          <div className="col-md-4 mb-3" key={produto.id}>
-            <div className="card h-100">
-              <img
-                className="card-img-top"
-                src={produto.imagem !== null ? produto.imagem : undefined}
-                alt={produto.nome !== null ? produto.nome : undefined}
-              />
+          <div className="col-md-3 mb-4" key={produto.id}>
+            <div className="card align-items-center maximizar-width card-img-top" style={{ maxHeight: "500px" }}>
+              <Link to={`/produto/${produto.codigo}`} state={{ produto }}>
+                <img
+                  className="card-img-top"
+                  src={produto.imagem !== null ? produto.imagem : undefined}
+                  alt={produto.nome !== null ? produto.nome : undefined}
+                />
+              </Link>
               <div className="card-body">
-                <h5 className="card-title">
-                  <Link to={`/produto/${produto.codigo}`} state={{ produto }}>
-                    {produto.nome}
-                  </Link>
-                </h5>
+                <p className="card-title">{produto.nome}</p>
+                <h4 className="card-text">
+                  { produto.tipoEstoque !== "PESO" ? `R$ ${produto.preco?.toFixed(2).replace(".", ",")}/Kg` : `R$ ${produto.preco?.toFixed(2).replace(".", ",")}` }
+                </h4>
                 <p className="card-text">
-                  Preço: R${produto.preco?.toFixed(2)}
+                { produto.tipoEstoque !== "PESO" ? `${produto.descricao} (Peso médio unidade: ${produto.pesoMedio}Kg)`.replace( ".", ",") : `${produto.descricao} ${produto.descQuantidade}Kg`.replace( ".", ",")}
                 </p>
               </div>
             </div>

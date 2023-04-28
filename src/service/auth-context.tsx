@@ -1,18 +1,24 @@
-import { ReactNode, createContext, useContext, useEffect, useState } from "react";
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { CreateUserDto } from "../model/createUserDto";
+import { KeyContext } from "../App";
+import CadastroCliente from "../model/CadastroCliente";
+import { MyContextType } from "../model/MyContextType";
 import LoginDto from "../model/loginDto";
 import LoginRetornoDto from "../model/loginRetornoDto";
 import { setupApiClient } from "./api";
-import { KeyContext } from "../App";
-import { MyContextType } from "../model/MyContextType";
 
 interface AuthContextData {
   user: UserProps | undefined;
   isAuthenticated: boolean;
   signIn: (credentials: LoginDto) => Promise<void>;
-  signUp: (credentials: CreateUserDto) => Promise<void>;
+  signUp: (credentials: CadastroCliente) => Promise<void>;
   signOut: (navigate: ReturnType<typeof useNavigate>) => void;
 }
 
@@ -28,7 +34,6 @@ interface AuthProviderProps {
 }
 
 export const AuthContext = createContext({} as AuthContextData);
-
 
 export function signOut(navigate: ReturnType<typeof useNavigate>) {
   try {
@@ -93,7 +98,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       api.defaults.headers.Authorization = `Bearer ${retorno.token}`;
       api.defaults.headers.common["id"] = retorno.id.toString();
 
-      toast('Login efetuado com sucesso!', {
+      toast("Login efetuado com sucesso!", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -102,7 +107,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         draggable: true,
         progress: undefined,
         theme: "light",
-        });
+      });
 
       setIsLoggedIn(true);
 
@@ -112,17 +117,28 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   };
 
-  async function signUp(createUserDto: CreateUserDto) {
+  async function signUp(CadastroCliente: CadastroCliente) {
     try {
-      const { firstName, lastName, email, password } = createUserDto;
+      const {
+        nome,
+        documento,
+        tipoDocumento,
+        celular,
+        email,
+        tipoPessoa,
+        userRecord,
+      } = CadastroCliente;
 
       const api = setupApiClient(navigate);
 
-      const response = await api.post("/cadastrar-user", {
-        firstName,
-        lastName,
+      const response = await api.post("/cliente/cadastro", {
+        nome,
+        documento,
+        tipoDocumento,
+        celular,
         email,
-        password,
+        tipoPessoa,
+        userRecord,
       });
 
       toast.success("Conta criada com sucesso");
