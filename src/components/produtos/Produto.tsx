@@ -1,11 +1,10 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Produto from "../../model/Produto";
 
 const Produtos = () => {
   const location = useLocation();
   const produto = location.state.produto as Produto;
 
-  const { codigo } = useParams();
   const navigate = useNavigate();
 
   const handleProduto = () => {

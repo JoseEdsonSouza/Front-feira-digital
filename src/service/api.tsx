@@ -1,11 +1,11 @@
 import axios, { AxiosError } from "axios";
-import { AuthTokenError } from "../errors/auth-token-error";
-import { signOut } from "./auth-context";
 import { useNavigate } from "react-router-dom";
+import { AuthTokenError } from "../errors/auth-token-error";
+import { signOut } from "./signOut";
 
 export function setupApiClient(navigate: ReturnType<typeof useNavigate>) {
-  const token = sessionStorage.getItem("token")
-  const id = sessionStorage.getItem("id")
+  sessionStorage.getItem("token")
+  sessionStorage.getItem("id")
 
   const api = axios.create({
     baseURL: "http://localhost:8082/",

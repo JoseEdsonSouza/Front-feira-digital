@@ -1,7 +1,6 @@
 import { createContext, useState } from "react";
 import { Outlet } from "react-router-dom";
 import "./App.css";
-import NavBar from "./components/navbar/navbar";
 import { AuthProvider } from "./service/auth-context";
 
 export const KeyContext = createContext({});

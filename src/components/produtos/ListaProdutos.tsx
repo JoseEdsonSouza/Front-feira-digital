@@ -3,12 +3,15 @@ import Busca from "../../model/Busca";
 import Produto from "../../model/Produto";
 import { setupApiClient } from "../../service/api";
 
-const ListarProdutos = (props: Busca, navigate: ReturnType<typeof useNavigate>) => {
-  const token = sessionStorage.getItem('token');
+const ListarProdutos = (
+  props: Busca,
+  navigate: ReturnType<typeof useNavigate>
+) => {
+  const token = sessionStorage.getItem("token");
 
   const api = setupApiClient(navigate);
-  
-  api.interceptors.request.use(config => {
+
+  api.interceptors.request.use((config) => {
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

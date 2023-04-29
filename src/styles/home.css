@@ -2,14 +2,13 @@
 
 .align-right {
     padding-top: 1.5rem;
-    /* ajuste a altura conforme necessário */
 }
 
 .produtos-container {
     padding-bottom: 50px;
 }
 
-.maximizar-width{
+.maximizar-width {
     width: 100%;
 }
 

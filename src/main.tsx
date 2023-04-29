@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import LoginPage from "./routes/LoginPage.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./routes/Home.tsx";
 import App from "./App.tsx";
-import ErrorPage from "./routes/ErrorPage.tsx";
 import Produtos from "./components/produtos/Produto.tsx";
-import LogoutPage from "./routes/LogoutPage.tsx";
 import CadastroPage from "./routes/CadastroPage.tsx";
+import ErrorPage from "./routes/ErrorPage.tsx";
+import Home from "./routes/Home.tsx";
+import LoginPage from "./routes/LoginPage.tsx";
+import LogoutPage from "./routes/LogoutPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home></Home>
+        element: <Home></Home>,
       },
       {
         path: "login",
@@ -25,17 +25,17 @@ const router = createBrowserRouter([
       },
       {
         path: "produto/:codigo",
-        element: <Produtos></Produtos>
+        element: <Produtos></Produtos>,
       },
       {
         path: "logout",
-        element: <LogoutPage></LogoutPage>
+        element: <LogoutPage></LogoutPage>,
       },
       {
         path: "cadastro",
-        element: <CadastroPage></CadastroPage>
-      }
-    ]
+        element: <CadastroPage></CadastroPage>,
+      },
+    ],
   },
 ]);
 

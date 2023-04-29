@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
+import InputMask from "react-input-mask";
 import CadastroCliente from "../model/CadastroCliente";
 import UserRecord from "../model/UserRecord";
 import { AuthContext } from "../service/auth-context";
 import "../styles/login.css";
-import InputMask from "react-input-mask";
 
 export default function CadastroPage() {
   const [login, setLogin] = useState("");
@@ -26,7 +26,7 @@ export default function CadastroPage() {
       setConfirmPasswordError("As senhas não coincidem.");
       return;
     }
-    
+
     const userRecord: UserRecord = {
       login,
       password,

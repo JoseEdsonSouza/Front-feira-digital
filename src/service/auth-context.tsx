@@ -13,6 +13,8 @@ import { MyContextType } from "../model/MyContextType";
 import LoginDto from "../model/loginDto";
 import LoginRetornoDto from "../model/loginRetornoDto";
 import { setupApiClient } from "./api";
+import { signOut } from "./signOut";
+import InfosUser from "../model/InfosUser";
 
 interface AuthContextData {
   user: UserProps | undefined;
@@ -35,15 +37,6 @@ interface AuthProviderProps {
 
 export const AuthContext = createContext({} as AuthContextData);
 
-export function signOut(navigate: ReturnType<typeof useNavigate>) {
-  try {
-    sessionStorage.removeItem("token");
-    navigate("/");
-  } catch (err) {
-    console.log("erro ao deslogar:", err);
-  }
-}
-
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<UserProps>();
   const isAuthenticated = !(user == null);
@@ -56,9 +49,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     if (token) {
       api
-        .get("/infos")
-        .then((response: any) => {
+        .get<InfosUser>("/infos")
+        .then((response) => {
           const { id, firstName, email } = response.data;
+
           setUser({
             id,
             firstName,
@@ -71,7 +65,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
           signOut(navigate);
         });
     }
-  }, []);
+  }, [api, navigate]);
 
   const signIn = async ({ login, password }: LoginDto) => {
     try {
@@ -131,7 +125,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       const api = setupApiClient(navigate);
 
-      const response = await api.post("/cliente/cadastro", {
+      await api.post("/cliente/cadastro", {
         nome,
         documento,
         tipoDocumento,

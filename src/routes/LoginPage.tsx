@@ -1,8 +1,7 @@
 import React, { useContext, useState } from "react";
-import Usuario from "../model/Usuario";
+import LoginDto from "../model/loginDto";
 import { AuthContext } from "../service/auth-context";
 import "../styles/login.css";
-import LoginDto from "../model/loginDto";
 
 export default function LoginPage() {
   const [login, setLogin] = useState("");
