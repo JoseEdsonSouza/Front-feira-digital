@@ -15,7 +15,6 @@ function App() {
     <div className="App">
       <KeyContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
         <AuthProvider>
-          <NavBar></NavBar>
           <Outlet></Outlet>
         </AuthProvider>
       </KeyContext.Provider>

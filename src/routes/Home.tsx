@@ -4,6 +4,7 @@ import Busca from "../model/Busca";
 import Produto from "../model/Produto";
 import ListarProdutos from "../components/produtos/ListaProdutos";
 import "../styles/home.css";
+import NavBar from "../components/navbar/navbar";
 
 const Home = () => {
   const [nome, setNome] = useState("");
@@ -21,26 +22,22 @@ const Home = () => {
     nome: nome.length !== 0 ? nome : null,
   };
 
+  const handleSearch = (term: any) => {
+    setNome(term);
+  };
+
   useEffect(() => {
     (async () => setListaProdutos(await ListarProdutos(busca, navigate)))();
   }, [nome, filtro]);
 
   return (
     <div className="container">
-      <h1 className="text-center my-5">Produtos</h1>
+      <NavBar onSearch={handleSearch}></NavBar>
+      <h1 className="text-center my-5" style={{ paddingTop: '80px' }}>Os melhores produtos da feira na sua casa</h1>
       <div className="row produtos-container">
         <div className="col-md-8">
           <div className="d-flex align-items-center">
-            <div className="input-group w-100">
-              <input
-                type="text"
-                className="form-control"
-                id="text"
-                placeholder="Buscar por nome"
-                value={nome}
-                onChange={(event) => setNome(event.target.value)}
-              />
-            </div>
+            
           </div>
         </div>
         <div className="col-md-2 ms-auto">
@@ -58,7 +55,7 @@ const Home = () => {
       </div>
       <div className="row">
         {listaProdutos.map((produto) => (
-          <div className="col-md-3 mb-4" key={produto.id}>
+          <div className="col-md-2 mb-4" key={produto.id}>
             <div className="card align-items-center maximizar-width card-img-top" style={{ maxHeight: "500px" }}>
               <Link to={`/produto/${produto.codigo}`} state={{ produto }}>
                 <img
