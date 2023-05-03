@@ -11,9 +11,13 @@ export function setupApiClient(navigate: ReturnType<typeof useNavigate>) {
     baseURL: "http://localhost:8082/",
   });
 
-  api.interceptors.response.use(
-    (response) => {
-      return response;
+  api.interceptors.request.use(
+    (config) => {
+      const token = sessionStorage.getItem("token");
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+      return config;
     },
     async (error: AxiosError) => {
         console.log("teste")
