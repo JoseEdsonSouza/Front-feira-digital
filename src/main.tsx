@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.tsx";
-import Produtos from "./components/produtos/Produto.tsx";
+import ProdutoSelecionado from "./components/produtos/Produto.tsx";
 import CadastroPage from "./routes/CadastroPage.tsx";
 import ErrorPage from "./routes/ErrorPage.tsx";
 import Home from "./routes/Home.tsx";
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
       },
       {
         path: "produto/:codigo",
-        element: <Produtos></Produtos>,
+        element: <ProdutoSelecionado></ProdutoSelecionado>,
       },
       {
         path: "logout",

@@ -25,6 +25,7 @@ const Home = () => {
       categoria: null,
       vendedor: null,
       nome: termo !== null && termo.length !== 0 ? termo : null,
+      codigo: null
     };
     return await ListarProdutos(busca, navigate);
   };

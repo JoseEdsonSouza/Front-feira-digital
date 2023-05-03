@@ -1,11 +1,24 @@
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Produto from "../../model/Produto";
+import ListarProdutoUnico from "./ListarProdutoUnico";
 
-const Produtos = () => {
+const ProdutoSelecionado = () => {
   const location = useLocation();
-  const produto = location.state.produto as Produto;
-
+  const produtoBusca = location.state.produto as Produto;
+  const [produto, setProduto] = useState<Produto | null>();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    (async () => setProduto(await buscarProduto(produtoBusca, navigate)))();
+  }, [produtoBusca, navigate]);
+
+  const buscarProduto = async (
+    prod: Produto,
+    navigate: ReturnType<typeof useNavigate>
+  ) => {
+    return await ListarProdutoUnico(prod.codigo, navigate);
+  };
 
   const handleProduto = () => {
     console.log("Pronto");
@@ -14,12 +27,12 @@ const Produtos = () => {
 
   return (
     <div>
-      <h1>{produto.nome}</h1>
-      <h3>R$ {produto.preco}</h3>
-      <p>Produto de codigo: {produto.codigo}</p>
+      <h1>{produto?.nome}</h1>
+      <h3>R$ {produto?.preco}</h3>
+      <p>Produto de codigo: {produto?.codigo}</p>
       <button onClick={handleProduto}>Comprar </button>
     </div>
   );
 };
 
-export default Produtos;
+export default ProdutoSelecionado;
