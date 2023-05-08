@@ -33,7 +33,7 @@ const NavBar = () => {
       categoria: null,
       vendedor: null,
       nome: termo !== null && termo.length !== 0 ? termo : null,
-      codigo: null
+      codigo: null,
     };
     return await ListarProdutos(busca, navigate);
   };
@@ -45,13 +45,11 @@ const NavBar = () => {
   const handleButtonClick = () => {
     (async () =>
       setListaProdutos(await buscarProdutos(searchTerm, filtro, navigate)))();
-
-      console.log(listaProdutos)
   };
 
-  // useEffect(() => {
-  //   onSearch(searchTerm);
-  // }, [searchTerm, onSearch]);
+  useEffect(() => {
+    onSearch(searchTerm);
+  }, [listaProdutos]);
 
   return (
     <>
@@ -86,8 +84,11 @@ const NavBar = () => {
                   placeholder="Buscar por nome"
                   onChange={handleChange}
                 />
-                <button className="btn btn-success" type="button"
-                onClick={handleButtonClick}>
+                <button
+                  className="btn btn-success"
+                  type="button"
+                  onClick={handleButtonClick}
+                >
                   Button
                 </button>
               </div>
