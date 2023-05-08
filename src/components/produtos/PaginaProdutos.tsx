@@ -1,38 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Busca from "../model/Busca";
-import Produto from "../model/Produto";
-import ListarProdutos from "../components/produtos/ListaProdutos";
 import "../styles/home.css";
-import NavBar from "../components/navbar/navbar";
+import NavBar from "../navbar/navbar";
+import Produto from "../../model/Produto";
 
-const Home = () => {
-  const [listaProdutos, setListaProdutos] = useState<Produto[]>([]);
+const Home = ( listaProdutos: Produto[] ) => {
   const [filtro, setFiltro] = useState<string | null>(null);
   const navigate = useNavigate();
-
-  const buscarProdutos = async (
-    termo: string | null,
-    filtro: string | null,
-    navigate: ReturnType<typeof useNavigate>
-  ) => {
-    const busca: Busca = {
-      pagina: 1,
-      tipoPreco: filtro !== null ? filtro : "MENOR_PRECO",
-      precoMin: null,
-      precoMax: null,
-      categoria: null,
-      vendedor: null,
-      nome: null,
-      codigo: null
-    };
-    return await ListarProdutos(busca, navigate);
-  };
-
-  useEffect(() => {
-    (async () =>
-      setListaProdutos(await buscarProdutos(null, filtro, navigate)))();
-  }, [filtro, navigate]);
 
   return (
     <div className="container">
