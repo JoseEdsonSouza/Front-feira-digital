@@ -3,7 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Produto from "../../model/Produto";
 import ListarProdutoUnico from "./ListarProdutoUnico";
 import "./produto.css";
-import { auto } from "@popperjs/core";
+import Carrinho from "../carrinho/Carrinho";
+import NavBar from "../navbar/navbar";
 
 const ProdutoSelecionado = () => {
   const location = useLocation();
@@ -41,10 +42,14 @@ const ProdutoSelecionado = () => {
 
   return (
     <div>
-      <div className="container d-flex align-items-center justify-content-center overflow-hidden">
+      <NavBar></NavBar>
+      <div
+        className="container d-flex align-items-center justify-content-center"
+        style={{ paddingTop: "100px"}}
+      >
         <div
           className="bg-secondary bg-opacity-10"
-          style={{ maxWidth: "700px", maxHeight: "700px", padding: "20px" }}
+          style={{ maxWidth: "1200px", maxHeight: "700px", padding: "20px" }}
         >
           <div className="card-body row">
             <div className="col-md-7 centralizar">
@@ -54,50 +59,44 @@ const ProdutoSelecionado = () => {
                 alt={produto?.nome ?? ""}
               />
             </div>
-            <div className="col-md-5">
-              <div className="container d-flex justify-content-around">
-                <div className="row">
-                  <div className="col-12 text-center centralizar">
-                    <h2>{produto?.nome}</h2>
+            <div className="col-md-5 centralizar d-flex">
+              <div className="row">
+                <h2 style={{ fontWeight: "400" }}>{produto?.nome}</h2>
+                <h4>
+                  {produto?.tipoEstoque !== "PESO"
+                    ? `R$ ${produto?.preco?.toFixed(2).replace(".", ",")}/Kg`
+                    : `R$ ${produto?.preco?.toFixed(2).replace(".", ",")}`}
+                </h4>
+                <p>
+                  {produto?.tipoEstoque !== "PESO"
+                    ? `${produto?.descricao} (Peso médio unidade: ${produto?.pesoMedio}Kg)`.replace(
+                        ".",
+                        ","
+                      )
+                    : `${produto.descricao} ${produto.descQuantidade}Kg`.replace(
+                        ".",
+                        ","
+                      )}
+                </p>
+                <div className="d-flex centralizar justify-content-between">
+                  <div>
+                    <button onClick={decrement} className="btn btn-primary">
+                      -
+                    </button>
+
+                    <span className="margin-span">{count}</span>
+
+                    <button onClick={increment} className="btn btn-primary">
+                      +
+                    </button>
                   </div>
-                  <div className="col-12 centralizar-junto texto">
-                    <h4 className="card-text maximizar-width">
-                      {produto?.tipoEstoque !== "PESO"
-                        ? `R$ ${produto?.preco
-                            ?.toFixed(2)
-                            .replace(".", ",")}/Kg`
-                        : `R$ ${produto?.preco?.toFixed(2).replace(".", ",")}`}
-                    </h4>
-                    <p className="card-text">
-                      {produto?.tipoEstoque !== "PESO"
-                        ? `${produto?.descricao} (Peso médio unidade: ${produto?.pesoMedio}Kg)`.replace(
-                            ".",
-                            ","
-                          )
-                        : `${produto.descricao} ${produto.descQuantidade}Kg`.replace(
-                            ".",
-                            ","
-                          )}
-                    </p>
-                    <div className="margin-span">
-                      <button onClick={decrement} className="btn btn-primary">
-                        -
-                      </button>
-
-                      <span className="margin-span">{count}</span>
-
-                      <button onClick={increment} className="btn btn-primary">
-                        +
-                      </button>
-                    </div>
-                    <div className="separar">
-                      <button
-                        onClick={handleProduto}
-                        className="btn btn-primary btn-lg"
-                      >
-                        Comprar{" "}
-                      </button>
-                    </div>
+                  <div>
+                    <button
+                      onClick={handleProduto}
+                      className="btn btn-primary btn-lg"
+                    >
+                      Comprar{" "}
+                    </button>
                   </div>
                 </div>
               </div>

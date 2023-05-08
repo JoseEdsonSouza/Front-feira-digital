@@ -30,10 +30,6 @@ const Home = () => {
     return await ListarProdutos(busca, navigate);
   };
 
-  const handleSearch = (term: string | null) => {
-    setNome(term);
-  };
-
   useEffect(() => {
     (async () =>
       setListaProdutos(await buscarProdutos(nome, filtro, navigate)))();
@@ -41,7 +37,7 @@ const Home = () => {
 
   return (
     <div className="container">
-      <NavBar onSearch={handleSearch}></NavBar>
+      <NavBar></NavBar>
       <h1 className="text-center my-5" style={{ paddingTop: "80px" }}>
         Os melhores produtos da feira na sua casa
       </h1>

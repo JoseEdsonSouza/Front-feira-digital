@@ -4,12 +4,13 @@ import { KeyContext } from "../../App";
 import { MyContextType } from "../../model/MyContextType";
 import logo from "../../assets/logo.png";
 import iconLogin from "../../assets/Vector.png";
+import Carrinho from "../carrinho/Carrinho";
 
 type NavbarProps = {
   onSearch: (searchTerm: string) => void;
 };
 
-const NavBar = ({ onSearch }: NavbarProps) => {
+const NavBar = () => {
   const { isLoggedIn } = useContext(KeyContext) as MyContextType;
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -17,15 +18,19 @@ const NavBar = ({ onSearch }: NavbarProps) => {
     setSearchTerm(event.target.value);
   };
 
-  useEffect(() => {
-    onSearch(searchTerm);
-  }, [searchTerm, onSearch]);
+  const handleButtonClick = () => {
+    console.log(searchTerm); // Aqui você pode fazer o que quiser com o texto do input
+  };
+
+  // useEffect(() => {
+  //   onSearch(searchTerm);
+  // }, [searchTerm, onSearch]);
 
   return (
     <>
       <nav
         className="navbar fixed-top"
-        style={{ backgroundColor: "rgba(0, 128, 0, 0.5)" }}
+        style={{ backgroundColor: "rgba(0, 128, 0, 0.5)", zIndex: 100 }}
       >
         <div className="container-fluid">
           <div className="nav-link active col-md-1 text-light">
@@ -54,6 +59,10 @@ const NavBar = ({ onSearch }: NavbarProps) => {
                   placeholder="Buscar por nome"
                   onChange={handleChange}
                 />
+                <button className="btn btn-success" type="button"
+                onClick={handleButtonClick}>
+                  Button
+                </button>
               </div>
             </div>
           </div>
@@ -67,6 +76,7 @@ const NavBar = ({ onSearch }: NavbarProps) => {
             >
               Cadastro
             </Link>
+            <Carrinho></Carrinho>
             <Link
               to="/login"
               hidden={isLoggedIn}
