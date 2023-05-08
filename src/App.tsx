@@ -11,13 +11,11 @@ function App() {
   );
 
   return (
-    <div className="App">
-      <KeyContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
-        <AuthProvider>
-          <Outlet></Outlet>
-        </AuthProvider>
-      </KeyContext.Provider>
-    </div>
+    <KeyContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+      <AuthProvider>
+        <Outlet></Outlet>
+      </AuthProvider>
+    </KeyContext.Provider>
   );
 }
 
