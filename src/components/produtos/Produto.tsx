@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Produto from "../../model/Produto";
+import NavBar from "../navbar/navbar";
 import ListarProdutoUnico from "./ListarProdutoUnico";
 import "./produto.css";
-import Carrinho from "../carrinho/Carrinho";
-import NavBar from "../navbar/navbar";
+import Carrinho from "../../model/Carrinho";
 
 const ProdutoSelecionado = () => {
   const location = useLocation();
@@ -15,7 +15,11 @@ const ProdutoSelecionado = () => {
   const [count, setCount] = useState(0);
 
   const increment = () => {
-    setCount(count + 1);
+    if (produto?.estoque) {
+      if (count < produto?.estoque) {
+        setCount(count + 1);
+      }
+    }
   };
 
   const decrement = () => {
@@ -37,7 +41,37 @@ const ProdutoSelecionado = () => {
 
   const handleProduto = () => {
     console.log("Pronto");
-    return navigate("/");
+    const carrinhoString = sessionStorage.getItem("carrinho");
+
+    if (produto) {
+      if (carrinhoString) {
+        const carrinho = JSON.parse(carrinhoString);
+
+        const addCarrinho: Carrinho = {
+          produto: produto,
+          quantidade: count,
+        };
+
+        carrinho.push(addCarrinho);
+
+        sessionStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+        console.log('carrinho velho')
+      } else {
+        const addCarrinho: Carrinho = {
+          produto: produto,
+          quantidade: count,
+        };
+
+        const novoCarrinho: Carrinho[] = [];
+
+        novoCarrinho.push(addCarrinho);
+
+        sessionStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
+
+        console.log('carrinho novo')
+      }
+    }
   };
 
   return (
@@ -45,7 +79,7 @@ const ProdutoSelecionado = () => {
       <NavBar></NavBar>
       <div
         className="container d-flex align-items-center justify-content-center"
-        style={{ paddingTop: "100px"}}
+        style={{ paddingTop: "100px" }}
       >
         <div
           className="bg-secondary bg-opacity-10"
@@ -80,22 +114,22 @@ const ProdutoSelecionado = () => {
                 </p>
                 <div className="d-flex centralizar justify-content-between">
                   <div>
-                    <button onClick={decrement} className="btn btn-primary">
+                    <button onClick={decrement} className="btn btn-success">
                       -
                     </button>
 
                     <span className="margin-span">{count}</span>
 
-                    <button onClick={increment} className="btn btn-primary">
+                    <button onClick={increment} className="btn btn-success">
                       +
                     </button>
                   </div>
                   <div>
                     <button
                       onClick={handleProduto}
-                      className="btn btn-primary btn-lg"
+                      className="btn btn-success btn-lg"
                     >
-                      Comprar{" "}
+                      Comprar
                     </button>
                   </div>
                 </div>

@@ -48,14 +48,14 @@ const NavBar = () => {
   };
 
   useEffect(() => {
-    onSearch(searchTerm);
+    // onSearch(searchTerm);
   }, [listaProdutos]);
 
   return (
     <>
       <nav
         className="navbar fixed-top"
-        style={{ backgroundColor: "rgba(0, 128, 0, 0.5)", zIndex: 100 }}
+        style={{ backgroundColor: "rgba(167, 255, 167)", zIndex: 100 }}
       >
         <div className="container-fluid">
           <div className="nav-link active col-md-1 text-light">
@@ -74,7 +74,7 @@ const NavBar = () => {
             </Link>
           </div>
 
-          <div className="nav-link active col-md-9">
+          <div className="nav-link active col-md-8">
             <div className="d-flex align-items-center">
               <div className="input-group w-100">
                 <input
@@ -95,35 +95,32 @@ const NavBar = () => {
             </div>
           </div>
 
-          <div className="nav-link active col-md-2 text-light d-flex justify-content-end">
+          <div className="nav-link active col-md-3 text-light d-flex justify-content-around">
+            <Carrinho></Carrinho>
             <Link
               to="/cadastro"
               hidden={isLoggedIn}
-              className="nav-link active mx-2 text-light"
+              className="btn btn-success"
               aria-current="page"
+              type="button"
             >
               Cadastro
             </Link>
-            <Carrinho></Carrinho>
             <Link
               to="/login"
               hidden={isLoggedIn}
-              className="nav-link active mx-2 text-light"
+              className="btn btn-success"
               aria-current="page"
+              type="button"
             >
-              <img
-                src={iconLogin}
-                alt="Logo"
-                height="25"
-                width="25"
-                className="mr-3"
-              />
+              Entrar
             </Link>
             <Link
               to="/logout"
               hidden={!isLoggedIn}
-              className="nav-link active mx-2 text-light"
+              className="btn btn-success"
               aria-current="page"
+              type="button"
             >
               Sair
             </Link>

@@ -11,8 +11,8 @@ const Carrinho = () => {
 
   return (
     <div>
-      <button onClick={toggleModal}>
-        {modalIsOpen ? "Fechar Carrinho" : "Abrir Carrinho"}
+      <button onClick={toggleModal} className="btn btn-success">
+        {modalIsOpen ? "Carrinho" : "Carrinho"}
       </button>
       <ReactModal
         isOpen={modalIsOpen}
@@ -26,7 +26,7 @@ const Carrinho = () => {
         <p>Item 1</p>
         <p>Item 2</p>
         <p>Item 3</p>
-        <button onClick={toggleModal}>
+        <button onClick={toggleModal} className="btn btn-success">
         {modalIsOpen ? "Fechar Carrinho" : "Abrir Carrinho"}
       </button>
       </ReactModal>
