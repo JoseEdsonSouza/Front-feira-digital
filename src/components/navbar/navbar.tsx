@@ -3,11 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { KeyContext } from "../../App";
 import { MyContextType } from "../../model/MyContextType";
 import logo from "../../assets/logo.png";
-import iconLogin from "../../assets/Vector.png";
 import Carrinho from "../carrinho/Carrinho";
-import Busca from "../../model/Busca";
 import ListarProdutos from "../produtos/ListaProdutos";
 import Produto from "../../model/Produto";
+import PaginaBusca from "../../routes/PaginaBusca";
+import Busca from "../../model/Busca";
 
 type NavbarProps = {
   onSearch: (searchTerm: string) => void;
@@ -20,36 +20,16 @@ const NavBar = () => {
   const [filtro, setFiltro] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const buscarProdutos = async (
-    termo: string | null,
-    filtro: string | null,
-    navigate: ReturnType<typeof useNavigate>
-  ) => {
-    const busca: Busca = {
-      pagina: 1,
-      tipoPreco: filtro !== null ? filtro : "MENOR_PRECO",
-      precoMin: null,
-      precoMax: null,
-      categoria: null,
-      vendedor: null,
-      nome: termo !== null && termo.length !== 0 ? termo : null,
-      codigo: null,
-    };
-    return await ListarProdutos(busca, navigate);
-  };
+  
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
 
   const handleButtonClick = () => {
-    (async () =>
-      setListaProdutos(await buscarProdutos(searchTerm, filtro, navigate)))();
+    sessionStorage.setItem('busca', searchTerm);
+    navigate('/busca');
   };
-
-  useEffect(() => {
-    // onSearch(searchTerm);
-  }, [listaProdutos]);
 
   return (
     <>
@@ -89,7 +69,7 @@ const NavBar = () => {
                   type="button"
                   onClick={handleButtonClick}
                 >
-                  Button
+                  Buscar
                 </button>
               </div>
             </div>

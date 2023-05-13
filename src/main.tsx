@@ -8,6 +8,7 @@ import ErrorPage from "./routes/ErrorPage.tsx";
 import Home from "./routes/Home.tsx";
 import LoginPage from "./routes/LoginPage.tsx";
 import LogoutPage from "./routes/LogoutPage.tsx";
+import PaginaBusca from "./routes/PaginaBusca.tsx";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "cadastro",
         element: <CadastroPage></CadastroPage>,
+      },
+      {
+        path: "busca",
+        element: <PaginaBusca></PaginaBusca>,
       },
     ],
   },
