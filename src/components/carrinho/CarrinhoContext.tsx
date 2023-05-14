@@ -24,12 +24,19 @@ export const CarrinhoProvider: React.FC<{ children: React.ReactNode }> = ({
     if (carrinhoString) {
       const carrinho = JSON.parse(carrinhoString) as Carrinho[];
       setMeuCarrinho(carrinho);
+    } else {
+      const novoCarrinho: Carrinho[] = [];
+      sessionStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
+      setMeuCarrinho(novoCarrinho);
     }
-  }, [meuCarrinho]);
+  }, []);
 
   const adicionarItem = (item: Carrinho) => {
-    setMeuCarrinho((prevCarrinho) => [...prevCarrinho, item]);
-    sessionStorage.setItem("carrinho", JSON.stringify([...meuCarrinho, item]));
+    setMeuCarrinho((prevCarrinho) => {
+      const novoCarrinho = [...prevCarrinho, item];
+      sessionStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
+      return novoCarrinho;
+    });
   };
 
   const removerItem = (index: number) => {

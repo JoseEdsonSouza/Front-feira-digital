@@ -37,7 +37,7 @@ const CarrinhoComponent = () => {
         contentLabel="Carrinho"
         ariaHideApp={false}
       >
-        {meuCarrinho.length === 0 ? (
+        {!meuCarrinho || meuCarrinho.length === 0 ? (
           <div>
             <p>O carrinho está vazio.</p>
           </div>

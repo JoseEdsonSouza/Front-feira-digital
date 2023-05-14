@@ -1,16 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Produto from "../../model/Produto";
 import NavBar from "../navbar/navbar";
 import ListarProdutoUnico from "./ListarProdutoUnico";
 import "./produto.css";
 import Carrinho from "../../model/Carrinho";
+import { CarrinhoContext } from "../carrinho/CarrinhoContext";
 
 const ProdutoSelecionado = () => {
   const location = useLocation();
   const produtoBusca = location.state.produto as Produto;
   const [produto, setProduto] = useState<Produto | null>();
   const navigate = useNavigate();
+  const carrinhoContext = useContext(CarrinhoContext);
 
   const [count, setCount] = useState(0);
 
@@ -40,38 +42,19 @@ const ProdutoSelecionado = () => {
   };
 
   const handleProduto = () => {
-    if (count !== 0) {
+    if (count !== 0 && produto) {
       console.log("Pronto");
       const carrinhoString = sessionStorage.getItem("carrinho");
 
-      if (produto) {
-        if (carrinhoString) {
-          const carrinho = JSON.parse(carrinhoString);
+      if (carrinhoString) {
+        const carrinho = JSON.parse(carrinhoString) as Carrinho[];
 
-          const addCarrinho: Carrinho = {
-            produto: produto,
-            quantidade: count,
-          };
+        const addCarrinho: Carrinho = {
+          produto: produto,
+          quantidade: count,
+        };
 
-          carrinho.push(addCarrinho);
-
-          sessionStorage.setItem("carrinho", JSON.stringify(carrinho));
-
-          console.log("carrinho velho");
-        } else {
-          const addCarrinho: Carrinho = {
-            produto: produto,
-            quantidade: count,
-          };
-
-          const novoCarrinho: Carrinho[] = [];
-
-          novoCarrinho.push(addCarrinho);
-
-          sessionStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
-
-          console.log("carrinho novo");
-        }
+        carrinhoContext?.adicionarItem(addCarrinho);
       }
     }
   };
