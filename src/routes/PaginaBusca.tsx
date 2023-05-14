@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Produto from "../model/Produto";
 import NavBar from "../components/navbar/navbar";
-import "../styles/home.css";
+import "./styles/home.css";
 import Busca from "../model/Busca";
 import ListarProdutos from "../components/produtos/ListaProdutos";
 

@@ -1,34 +1,33 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { KeyContext } from "../../App";
-import { MyContextType } from "../../model/MyContextType";
 import logo from "../../assets/logo.png";
-import Carrinho from "../carrinho/Carrinho";
-import ListarProdutos from "../produtos/ListaProdutos";
+import { MyContextType } from "../../model/MyContextType";
 import Produto from "../../model/Produto";
-import PaginaBusca from "../../routes/PaginaBusca";
-import Busca from "../../model/Busca";
-
-type NavbarProps = {
-  onSearch: (searchTerm: string) => void;
-};
+import Carrinho from "../carrinho/Carrinho";
+import { CarrinhoContext } from "../carrinho/CarrinhoContext";
+import "./navbar.css";
 
 const NavBar = () => {
   const { isLoggedIn } = useContext(KeyContext) as MyContextType;
   const [searchTerm, setSearchTerm] = useState("");
   const [listaProdutos, setListaProdutos] = useState<Produto[]>([]);
   const [filtro, setFiltro] = useState<string | null>(null);
+  const carrinhoContext = useContext(CarrinhoContext);
+  const [contadorItens, setContadorItens] = useState(0);
   const navigate = useNavigate();
 
-  
+  useEffect(() => {
+    setContadorItens(carrinhoContext?.meuCarrinho.length || 0);
+  }, [carrinhoContext?.meuCarrinho]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
 
   const handleButtonClick = () => {
-    sessionStorage.setItem('busca', searchTerm);
-    navigate('/busca');
+    sessionStorage.setItem("busca", searchTerm);
+    navigate("/busca");
   };
 
   return (
@@ -76,7 +75,14 @@ const NavBar = () => {
           </div>
 
           <div className="nav-link active col-md-3 text-light d-flex justify-content-around">
-            <Carrinho></Carrinho>
+            <div className="position-relative">
+              <Carrinho></Carrinho>
+              {contadorItens > 0 && (
+                <div className="cart-notification">
+                  <span>{contadorItens}</span>
+                </div>
+              )}
+            </div>
             <Link
               to="/cadastro"
               hidden={isLoggedIn}

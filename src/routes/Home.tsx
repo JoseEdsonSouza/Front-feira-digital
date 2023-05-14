@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Busca from "../model/Busca";
 import Produto from "../model/Produto";
 import ListarProdutos from "../components/produtos/ListaProdutos";
-import "../styles/home.css";
+import "./styles/home.css";
 import NavBar from "../components/navbar/navbar";
 
 const Home = () => {

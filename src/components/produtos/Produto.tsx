@@ -40,36 +40,38 @@ const ProdutoSelecionado = () => {
   };
 
   const handleProduto = () => {
-    console.log("Pronto");
-    const carrinhoString = sessionStorage.getItem("carrinho");
+    if (count !== 0) {
+      console.log("Pronto");
+      const carrinhoString = sessionStorage.getItem("carrinho");
 
-    if (produto) {
-      if (carrinhoString) {
-        const carrinho = JSON.parse(carrinhoString);
+      if (produto) {
+        if (carrinhoString) {
+          const carrinho = JSON.parse(carrinhoString);
 
-        const addCarrinho: Carrinho = {
-          produto: produto,
-          quantidade: count,
-        };
+          const addCarrinho: Carrinho = {
+            produto: produto,
+            quantidade: count,
+          };
 
-        carrinho.push(addCarrinho);
+          carrinho.push(addCarrinho);
 
-        sessionStorage.setItem("carrinho", JSON.stringify(carrinho));
+          sessionStorage.setItem("carrinho", JSON.stringify(carrinho));
 
-        console.log('carrinho velho')
-      } else {
-        const addCarrinho: Carrinho = {
-          produto: produto,
-          quantidade: count,
-        };
+          console.log("carrinho velho");
+        } else {
+          const addCarrinho: Carrinho = {
+            produto: produto,
+            quantidade: count,
+          };
 
-        const novoCarrinho: Carrinho[] = [];
+          const novoCarrinho: Carrinho[] = [];
 
-        novoCarrinho.push(addCarrinho);
+          novoCarrinho.push(addCarrinho);
 
-        sessionStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
+          sessionStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
 
-        console.log('carrinho novo')
+          console.log("carrinho novo");
+        }
       }
     }
   };
@@ -125,11 +127,8 @@ const ProdutoSelecionado = () => {
                     </button>
                   </div>
                   <div>
-                    <button
-                      onClick={handleProduto}
-                      className="btn btn-success btn-lg"
-                    >
-                      Comprar
+                    <button onClick={handleProduto} className="btn btn-success">
+                      Adicionar ao carrinho
                     </button>
                   </div>
                 </div>

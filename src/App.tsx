@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 import { Outlet } from "react-router-dom";
 import "./App.css";
 import { AuthProvider } from "./service/auth-context";
+import { CarrinhoProvider } from "./components/carrinho/CarrinhoContext";
 
 export const KeyContext = createContext({});
 
@@ -13,7 +14,9 @@ function App() {
   return (
     <KeyContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
       <AuthProvider>
-        <Outlet></Outlet>
+        <CarrinhoProvider>
+          <Outlet></Outlet>
+        </CarrinhoProvider>
       </AuthProvider>
     </KeyContext.Provider>
   );
