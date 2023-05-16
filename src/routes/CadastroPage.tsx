@@ -52,12 +52,13 @@ export default function CadastroPage() {
 
   return (
     <div className="container-login d-flex align-items-center justify-content-center">
+      <div className="container-centro">
       <div className="card-cadastro">
         <h1 className="mb-5 mb-5-login">Já tem conta?</h1>
         <div className="msgCadastrar">
           Entre para poder apreciar tudo que temos de melhor no mundo agrícola!
         </div>
-        <button className="btncad btn-dark" onClick={entrar}>
+        <button className="btn verde_amarelado" onClick={entrar}>
           Entrar
         </button>
       </div>
@@ -123,12 +124,13 @@ export default function CadastroPage() {
                 <div className="text-danger">{confirmPasswordError}</div>
               )}
             </div>
-            <button className="btn btn-dark" type="submit">
+            <button className="btn verde_escuro" type="submit">
               Cadastrar
             </button>
           </form>
         </div>
       </div>
+    </div>
     </div>
   );
 }

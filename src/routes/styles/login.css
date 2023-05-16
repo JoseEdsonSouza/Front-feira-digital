@@ -1,105 +1,131 @@
-@import 'bootstrap/dist/css/bootstrap.min.css';
+@import "bootstrap/dist/css/bootstrap.min.css";
 
+:root {
+	--amarelo-claro: #fcfcf4;
+	--verde-amarelado: #dee236;
+	--verde-medio: #9ac434;
+	--verde-escuro: #05260b;
+	--branco: #fff;
+
+	--sombra-principal: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+/*Container*/
 .container-login {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+.container-centro {
+	display: flex;
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	border-radius: 10px;
 }
 
-.card-p-4-login, .card-cadastro {
-    flex: 1;
-    padding: 50px;
-    width: 400px;
-    height: 400px;
-    max-width: 500px;
-    max-height: 400px;
-
+/*Cartões*/
+.card-p-4-login,
+.card-cadastro {
+	padding: 50px;
+	width: 400px;
 }
 
-.card-p-5-login, .card-login {
-    flex: 1;
-    padding: 50px;
-    width: 400px;
-    height: 700px;
-    max-width: 500px;
-    max-height: 800px;
-
+.card-p-5-login,
+.card-login {
+	flex: 1;
+	padding: 50px;
+	width: 400px;
+	height: 700px;
+	max-width: 500px;
+	max-height: 800px;
 }
 
-
-.card-p-4-login, .card-p-5-login {
-    background-color: rgb(231, 249, 231);
-    color: rgba(154, 196, 52, 1);
-    border-radius: 0px 10px 10px 0px;
+.card-p-4-login,
+.card-p-5-login {
+	background-color: var(--amarelo-claro);
+	color: var(--verde-medio);
+	border-radius: 0px 10px 10px 0px;
 }
 
-.card-cadastro, .card-login {
-    background-color: rgba(154, 196, 52, 1);
-    border-radius: 10px 0px 0px 10px;
-
-
+.card-cadastro,
+.card-login {
+	background-color: var(--verde-medio);
+	border-radius: 10px 0px 0px 10px;
 }
 
 .card-login {
-    background-color: rgba(154, 196, 52, 1);
-    border-radius: 10px 0px 0px 10px;
-
+	background-color: var(--verde-medio);
+	border-radius: 10px 0px 0px 10px;
 }
 
-.mb-5-login, .mb-6-login{
-    font-size: 30px;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+.mb-5-login,
+.mb-6-login {
+	font-size: 30px;
+	color: white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
 }
 
-.btncad {
-    float: none;
-    background-color: yellow;
-    border-style: none;
-    border-radius: 10px;
-    align-items: center;
-    font-size: 13px;
-    padding: 10px;
+/*botões*/
+.btn {
+	min-width: 100px;
+	min-height: 25px;
+	box-shadow: var(--sombra-principal);
+	transition: 0.3s all ease;
+}
+.btn.verde_amarelado {
+	background-color: var(--verde-amarelado);
+	color: var(--verde-escuro);
+}
+.btn.verde_escuro {
+	background-color: var(--verde-escuro);
+	color: var(--branco);
+}
+.btn.verde_amarelado:hover {
+	background-color: var(--verde-escuro);
+	color: var(--branco);
+}
+.btn.verde_escuro:hover {
+	background-color: var(--verde-amarelado);
+	color: var(--verde-escuro);
 }
 
-.msgCadastrar, .msglogin {
-    color: white;
-    padding-bottom: 100px;
+/*Menssagem*/
+.msgCadastrar,
+.msglogin {
+	color: white;
+	padding-bottom: 20px;
+}
+/*Inputs*/
+.personalizado input[type="password"] {
+	background-color: var(--verde-medio);
+	border: 1px solid #ccc;
+	color: whitesmoke;
+	margin: 0 0 0 0;
+	padding: 5px;
 }
 
-
-
-.personalizado input[type=password] {
-    background-color: rgba(154, 196, 52, 1);
-    border: 1px solid #ccc;
-    color: whitesmoke;
-    margin: 0 0 0 0;
-    padding: 5px;
+.personalizado input[type="text"] {
+	background-color: var(--verde-medio);
+	border: 1px solid #ccc;
+	color: whitesmoke;
+	margin: 0 0 0 0;
+	padding: 5px;
 }
 
-.personalizado input[type=text] {
-    background-color: rgba(154, 196, 52, 1);
-    border: 1px solid #ccc;
-    color: whitesmoke;
-    margin: 0 0 0 0;
-    padding: 5px;
-}
-
-.personalizado input[type=email] {
-    background-color: rgba(154, 196, 52, 1);
-    border: 1px solid #ccc;
-    color: whitesmoke;
-    margin: 0 0 0 0;
-    padding: 5px;
+.personalizado input[type="email"] {
+	background-color: var(--verde-medio);
+	border: 1px solid #ccc;
+	color: whitesmoke;
+	margin: 0 0 0 0;
+	padding: 5px;
 }
 
 .mb-4-login {
-    text-align: center;
-    color: rgba(154, 196, 52, 1);
+	text-align: center;
+	color: var(--verde-medio);
 }
