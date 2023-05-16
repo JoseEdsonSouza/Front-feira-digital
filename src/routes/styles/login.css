@@ -100,7 +100,27 @@
 	color: white;
 	padding-bottom: 20px;
 }
+
+/*Icone*/
+.icone {
+	font-size: 35px;
+	margin: 5px;
+}
+
 /*Inputs*/
+.sobrepor {
+	position: relative;
+	display: flex;
+}
+
+.sobrepor .icone {
+	position: absolute;
+}
+
+.personalizado.form-control {
+	padding-left: 50px !important;
+}
+
 .personalizado input[type="password"] {
 	background-color: var(--verde-medio);
 	border: 1px solid #ccc;

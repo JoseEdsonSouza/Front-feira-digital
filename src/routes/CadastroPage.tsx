@@ -5,6 +5,7 @@ import UserRecord from "../model/UserRecord";
 import { AuthContext } from "../service/auth-context";
 import "./styles/login.css";
 import { useNavigate } from "react-router-dom";
+import { MdKey, MdPerson,MdLogin,MdCached } from "react-icons/md";
 
 export default function CadastroPage() {
   const [login, setLogin] = useState("");
@@ -67,51 +68,65 @@ export default function CadastroPage() {
           <h1>Criar conta</h1>
           <form onSubmit={aoSubmeterFormulario}>
             <div className="mb-3">
+             
               <label htmlFor="nome" className="form-label">
                 Nome:
               </label>
+              <div className="sobrepor">
+              <MdPerson className="icone"/>
               <input
                 type="text"
-                className="form-control"
+                className="personalizado form-control "
                 id="nome"
                 value={nome}
                 onChange={(event) => setNome(event.target.value)}
                 required
               />
+              </div>
             </div>
+
             <div className="mb-3">
               <label htmlFor="login" className="form-label">
                 Login:
               </label>
+              <div className="sobrepor">
+              <MdLogin className="icone"/>
               <input
                 type="text"
-                className="form-control"
+                className="personalizado form-control"
                 id="login"
                 value={login}
                 onChange={(event) => setLogin(event.target.value)}
                 required
               />
+              </div>
             </div>
             <div className="mb-3">
               <label htmlFor="password" className="form-label">
                 Senha:
               </label>
+              <div className="sobrepor">
+                <MdKey className="icone"/>
               <input
                 type="password"
-                className="form-control"
+                className="personalizado form-control"
                 id="password"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 required
               />
+              </div>
+              
             </div>
             <div className="mb-3">
               <label htmlFor="confirmPassword" className="form-label">
                 Confirmar senha:
               </label>
+              <div className="sobrepor">
+                <MdCached className="icone"/>
               <input
                 type="password"
-                className="form-control"
+                className="personalizado form-control"
                 id="confirmPassword"
                 value={confirmPassword}
                 onChange={(event) => {
@@ -123,6 +138,7 @@ export default function CadastroPage() {
               {confirmPasswordError && (
                 <div className="text-danger">{confirmPasswordError}</div>
               )}
+              </div>
             </div>
             <button className="btn verde_escuro" type="submit">
               Cadastrar
