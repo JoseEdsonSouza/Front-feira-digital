@@ -26,7 +26,7 @@ const CarrinhoComponent = () => {
 
   return (
     <div>
-      <button onClick={toggleModal} className="btn btn-success">
+      <button onClick={toggleModal} className="btn verde_escuro">
         {modalIsOpen ? "Fechar Carrinho" : "Carrinho"}
       </button>
       <ReactModal

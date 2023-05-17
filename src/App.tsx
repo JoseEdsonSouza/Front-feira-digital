@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import { Outlet } from "react-router-dom";
 import "./App.css";
+import "./routes/styles/global.css"
 import { AuthProvider } from "./service/auth-context";
 import { CarrinhoProvider } from "./components/carrinho/CarrinhoContext";
 
