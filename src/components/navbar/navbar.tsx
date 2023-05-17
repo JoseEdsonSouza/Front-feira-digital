@@ -26,15 +26,19 @@ const NavBar = () => {
   };
 
   const handleButtonClick = () => {
+    if(searchTerm ===""){
+      navigate("/");
+      return
+    }
     sessionStorage.setItem("busca", searchTerm);
     navigate("/busca");
+
   };
 
   return (
     <>
       <nav
-        className="navbar fixed-top"
-        style={{ backgroundColor: "rgba(167, 255, 167)", zIndex: 100 }}
+        className="navbar fixed-top"        
       >
         <div className="container-fluid">
           <div className="nav-link active col-md-1 text-light">
@@ -64,7 +68,7 @@ const NavBar = () => {
                   onChange={handleChange}
                 />
                 <button
-                  className="btn btn-success"
+                  className="btn verde_escuro"
                   type="button"
                   onClick={handleButtonClick}
                 >
@@ -86,7 +90,7 @@ const NavBar = () => {
             <Link
               to="/cadastro"
               hidden={isLoggedIn}
-              className="btn btn-success"
+              className="btn verde_escuro"
               aria-current="page"
               type="button"
             >
@@ -95,7 +99,7 @@ const NavBar = () => {
             <Link
               to="/login"
               hidden={isLoggedIn}
-              className="btn btn-success"
+              className="btn verde_escuro"
               aria-current="page"
               type="button"
             >
@@ -104,7 +108,7 @@ const NavBar = () => {
             <Link
               to="/logout"
               hidden={!isLoggedIn}
-              className="btn btn-success"
+              className="btn verde_escuro"
               aria-current="page"
               type="button"
             >

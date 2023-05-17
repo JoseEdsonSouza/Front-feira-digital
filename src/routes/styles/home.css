@@ -1,18 +1,14 @@
-@import 'bootstrap/dist/css/bootstrap.min.css';
+@import "bootstrap/dist/css/bootstrap.min.css";
 
-.align-right {
-    padding-top: 1.5rem;
+.card {
+	border: 5px solid var(--verde-amarelado) !important;
+	box-shadow: var(--sombra-principal);
+}
+.card img {
+	transform: scale(0.9);
+	transition: 0.3s all ease;
 }
 
-.produtos-container {
-    padding-bottom: 50px;
-}
-
-.maximizar-width {
-    width: 100%;
-}
-
-.card-img-top {
-    width: 100%;
-    height: 100%;
+.card img:hover {
+	transform: scale(1);
 }
