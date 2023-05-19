@@ -7,6 +7,7 @@ import { CarrinhoProvider } from "./components/carrinho/CarrinhoContext";
 
 export const KeyContext = createContext({});
 
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
     !!sessionStorage.getItem("token")
